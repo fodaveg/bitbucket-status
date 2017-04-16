@@ -1,0 +1,41 @@
+{% include '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="text-center center-block">
+        <div class="row">
+            <h4 class="col-md-4">
+                BRANCH
+            </h4>
+            <h4 class="col-md-4">
+                REPO
+            </h4>
+            <h4 class="col-md-4">
+                SERVER
+            </h4>
+        </div>
+        {% for repository in repositories %}
+            <div class="row">
+                <h4 class="col-md-4">
+                    <span class="label label-{{ repository.branchMasterStatus ? 'success' : 'danger' }}">Master</span>
+                    <span class="label label-{{ repository.branchDevelopStatus ? 'success' : 'danger' }}">Develop</span>
+                    <span class="label label-{{ repository.branchReleaseStatus ? 'success' : 'danger' }}">Release</span>
+                </h4>
+                <h4 class="col-md-4">
+                    <span class="label label-default">{{ repository.name }}</span>
+                </h4>
+                <h4 class="col-md-4">
+                    <span class="label label-{{ repository.serverProdStatus ? 'success' : 'danger' }}">Prod</span>
+                    <span class="label label-{{ repository.serverStagingStatus ? 'success' : 'danger' }}">Staging</span>
+                    <span class="label label-{{ repository.serverReleaseStatus ? 'success' : 'danger' }}">Release</span>
+                </h4>
+            </div>
+            {% if repository.blockDescription %}
+                <div class="col-md-10 col-md-offset-1">
+                    <h4 class="list-group-item list-group-item-danger">{{ repository.blockDescription }}</h4>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock body %}

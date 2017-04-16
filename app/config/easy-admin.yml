@@ -1,0 +1,17 @@
+easy_admin:
+    site_name: 'Dualhand Bitbucket Status'
+    design:
+        brand_color: 'green'
+    entities:
+        Repo:
+            class: AppBundle\Entity\Repo
+            list:
+                fields:
+                    - 'id'
+                    - 'name'
+                    - { property: 'serverProdStatus', label: 'Server Prod' }
+                    - { property: 'serverStagingStatus', label: 'Server Staging' }
+                    - { property: 'serverReleaseStatus', label: 'Server Release' }
+                    - { property: 'branchMasterStatus', label: 'Branch Master' }
+                    - { property: 'branchDevelopStatus', label: 'Branch Develop' }
+                    - { property: 'branchReleaseStatus', label: 'Branch Release' }

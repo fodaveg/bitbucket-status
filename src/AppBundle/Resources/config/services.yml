@@ -1,0 +1,8 @@
+services:
+    app.manager.bitbucket:
+        class: AppBundle\Manager\BitbucketManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%bitbucket_user%"
+            - "%bitbucket_pass%"
+            - "%bitbucket_account%"

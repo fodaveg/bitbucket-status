@@ -1,0 +1,42 @@
+version: '2'
+services:
+  apache:
+    build: etc/docker/development/apache
+    container_name: bitbucket-status.app
+    ports:
+      - "8083:80"
+      - "2223:22"
+      - "9003:9000"
+    depends_on:
+      - mysql
+    volumes:
+      - node_modules:/app/node_modules
+    volumes_from:
+      - key_volume
+      - code_volume
+
+  mysql:
+    image: mysql:5.7
+    ports:
+        - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bb-status
+    volumes:
+      - db_data:/var/lib/mysql
+
+  key_volume:
+    image: busybox
+    volumes:
+      - ~/.ssh:/root/.hostssh
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.composer:/root/.composer
+
+  code_volume:
+    image: busybox
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
+  node_modules:

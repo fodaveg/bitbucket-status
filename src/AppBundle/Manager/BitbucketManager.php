@@ -5,7 +5,7 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Repo;
 
 /**
- * @author David Velasco <dvelasco@wearemarketing.com>
+ * @author David Velasco <david@dualhand.com>
  */
 class BitbucketManager
 {
@@ -43,7 +43,6 @@ class BitbucketManager
 
         if ($persist == true) {
             foreach ($jsonRepos->values as $repo) {
-
                 $persistedRepo = $repoRepository->findOneByName($repo->full_name);
 
                 if (null === $persistedRepo) {
@@ -55,6 +54,38 @@ class BitbucketManager
             }
         }
 
-        return $repoRepository->findAll();
+        $orderedRepositories = $this->orderRepositoriesByBlockStatus($repoRepository->findAll());
+
+        return $orderedRepositories;
+    }
+
+    private function orderRepositoriesByBlockStatus($repositories)
+    {
+        $orderedRepositories = array();
+
+        foreach ($repositories as $repository) {
+            if ($this->isAnythingBlocked($repository)) {
+                array_unshift($orderedRepositories, $repository);
+            } else {
+                $orderedRepositories[] = $repository;
+            }
+        }
+
+        return $orderedRepositories;
+    }
+
+    /**
+     * @param $repository
+     *
+     * @return bool
+     */
+    private function isAnythingBlocked($repository)
+    {
+        return !$repository->getServerProdStatus() ||
+            !$repository->getServerStagingStatus() ||
+            !$repository->getServerReleaseStatus() ||
+            !$repository->getBranchReleaseStatus() ||
+            !$repository->getBranchDevelopStatus() ||
+            !$repository->getBranchMasterStatus();
     }
 }

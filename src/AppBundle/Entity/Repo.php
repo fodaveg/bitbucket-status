@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="app_repo")
  *
- * @author David Velasco <dvelasco@wearemarketing.com>
+ * @author David Velasco <david@dualhand.com>
  */
 class Repo
 {

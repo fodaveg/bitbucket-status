@@ -9,18 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
-     */
-    public function indexAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ));
-    }
-
-    /**
-     * @Route("/status", name="status")
+     * @Route("/", name="status")
      */
     public function statusAction(Request $request)
     {
@@ -28,7 +17,6 @@ class DefaultController extends Controller
 
         $repositories = $this->getBitbucketManager()->getRepositoriesFromBitbucket(true);
 
-        // replace this example code with whatever you need
         return $this->render('default/status.html.twig', array(
             'repositories' => $repositories,
         ));

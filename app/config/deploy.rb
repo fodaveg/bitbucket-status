@@ -4,7 +4,7 @@ role :app, "51.255.49.2", :primary => true
 set :application, "bitbucket-status"
 set :deploy_to, "/web/bitbucket-status"
 set :user, "fodaveg"
-set :ssh_options, {:forward_agent => true}
+set :ssh_options, {:forward_agent => true, :port => 7850}
 #set :shared_children, %w(app/logs)
 
 set :parameters_file, "parameters.yml.dist"
@@ -22,7 +22,7 @@ set :branch, "master"
 set :model_manager, "doctrine"
 
 #logger.level = Logger::MAX_LEVEL
-logger.level = 0
+logger.level = 3
 
 set :use_sudo, false
 default_run_options[:pty] = true

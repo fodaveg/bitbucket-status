@@ -4,18 +4,17 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="status")
      */
-    public function statusAction(Request $request)
+    public function statusAction()
     {
         $this->getBitbucketManager()->authenticate();
 
-        $repositories = $this->getBitbucketManager()->getRepositoriesFromBitbucket(true);
+        $repositories = $this->getBitbucketManager()->getRepositoriesFromBitbucket(false);
 
         return $this->render('default/status.html.twig', array(
             'repositories' => $repositories,

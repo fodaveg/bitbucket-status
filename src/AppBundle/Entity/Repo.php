@@ -25,6 +25,11 @@ class Repo
     protected $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
+
+    /**
      * @ORM\Column(type="boolean", options={"default":1})
      */
     protected $serverProdStatus = 1;
@@ -53,6 +58,11 @@ class Repo
      * @ORM\Column(type="boolean", options={"default":1})
      */
     protected $branchReleaseStatus = 1;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":1})
+     */
+    protected $showOnSite = 1;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -244,4 +254,51 @@ class Repo
 
         return $this;
     }
+
+    /**
+     * Getter for slug
+     *
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Setter for slug
+     *
+     * @param mixed $slug
+     *
+     * @return Repo
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * Getter for showOnSite
+     *
+     * @return mixed
+     */
+    public function getShowOnSite()
+    {
+        return $this->showOnSite;
+    }
+
+    /**
+     * Setter for showOnSite
+     *
+     * @param mixed $showOnSite
+     *
+     * @return Repo
+     */
+    public function setShowOnSite($showOnSite)
+    {
+        $this->showOnSite = $showOnSite;
+        return $this;
+    }
+
 }

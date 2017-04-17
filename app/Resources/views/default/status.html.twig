@@ -22,7 +22,7 @@
                     <span class="label label-{{ repository.branchReleaseStatus ? 'success' : 'danger' }}">Release</span>
                 </h4>
                 <h4 class="col-md-4">
-                    <span class="label label-default">{{ repository.name }}</span>
+                    <span class="label label-default">{{ repository.slug }}</span>
                 </h4>
                 <h4 class="col-md-4">
                     <span class="label label-{{ repository.serverProdStatus ? 'success' : 'danger' }}">Prod</span>
@@ -33,7 +33,6 @@
             {% if repository.blockDescription %}
                 <div class="col-md-10 col-md-offset-1">
                     <h4 class="list-group-item list-group-item-danger">{{ repository.blockDescription }}</h4>
-
                 </div>
             {% endif %}
         {% endfor %}

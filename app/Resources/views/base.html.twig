@@ -17,14 +17,17 @@
 
 <body>
 {% block body %}
+
     {% block header %}
         {% include ':global:header.html.twig' %}
-
     {% endblock header %}
+
     {% block content %}{% endblock content %}
 
 {% endblock %}
+
 {% block javascripts %}{% endblock %}
+
 <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
 <script src="{{ asset('js/jquery.js') }}"></script>
 <!-- Include all JavaScripts, compiled by Assetic -->

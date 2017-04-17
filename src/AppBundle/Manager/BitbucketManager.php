@@ -48,13 +48,14 @@ class BitbucketManager
                 if (null === $persistedRepo) {
                     $newRepo = new Repo();
                     $newRepo->setName($repo->full_name);
+                    $newRepo->setSlug($repo->slug);
                     $this->em->persist($newRepo);
                     $this->em->flush();
                 }
             }
         }
 
-        $orderedRepositories = $this->orderRepositoriesByBlockStatus($repoRepository->findAll());
+        $orderedRepositories = $this->orderRepositoriesByBlockStatus($repoRepository->findBy(['showOnSite' => 1]));
 
         return $orderedRepositories;
     }

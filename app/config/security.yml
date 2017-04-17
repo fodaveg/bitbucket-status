@@ -3,19 +3,17 @@ security:
         in_memory:
             memory:
                 users:
-                    admin:
-                        password: admin
+                    guest:
+                        password: wamguest
                         roles: 'ROLE_ADMIN'
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
-            anonymous: ~
             http_basic: ~
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_ADMIN }
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext

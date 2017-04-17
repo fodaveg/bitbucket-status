@@ -10,7 +10,7 @@ set :ssh_options, {:forward_agent => true, :port => 7850}
 set :parameters_file, "parameters.yml.dist"
 set :shared_files,      ["app/config/parameters.yml"]
 #this is the default shared_children configuration, so you don't need to uncomment unless you wanna some change
-#set :shared_children,     [app_path + "/logs", app_path + "/cache/sessions", web_path + "/uploads"]
+set :shared_children,     ["var/logs", "var/cache/sessions", web_path + "/uploads"]
 
 default_run_options[:shell] = '/bin/bash'
 
@@ -26,7 +26,7 @@ logger.level = 3
 
 set :use_sudo, false
 default_run_options[:pty] = true
-set :writable_dirs, ["app/cache", "app/logs"]
+set :writable_dirs, ["var/cache", "var/logs"]
 set :keep_releases, 5
 set :use_set_permissions, true
 set :webserver_user, "www-data"
@@ -49,7 +49,7 @@ task :quick_deploy do
 	capifony_pretty_print "--> Doing quick deploy (updating)"
 
 	if !dry_run
-		run "cd #{current_path} ; git fetch 2>&1 ; git checkout origin/master 2>&1 ; php app/console cache:clear --env=#{symfony_env_prod}"
+		run "cd #{current_path} ; git fetch 2>&1 ; git checkout origin/master 2>&1 ; php bin/console cache:clear --env=#{symfony_env_prod}"
 	end
 	capifony_puts_ok
 end
